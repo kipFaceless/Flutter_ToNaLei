@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_na_lei/pages/ui/auth/login_form_page.dart';
 
 class ToNaleiLogin extends StatefulWidget {
   const ToNaleiLogin({Key? key}) : super(key: key);
@@ -45,11 +46,16 @@ class _PaizanaLoginState extends State<ToNaleiLogin> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginFormPage()));
+                      },
                       child: Container(
                         width: 60,
-                        child: Center(
-                          child: const Text(
+                        child: const Center(
+                          child: Text(
                             'Entrar',
                             style: TextStyle(
                                 color: Color(0xFFE49516), fontSize: 10.0),
@@ -75,7 +81,7 @@ class _PaizanaLoginState extends State<ToNaleiLogin> {
                           style: TextStyle(color: Colors.black, fontSize: 11.0),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               )
