@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:to_na_lei/pages/ui/auth/login_form_page.dart';
+import 'package:to_na_lei/pages/ui/auth/register_form_page.dart';
 
 class ToNaleiLogin extends StatefulWidget {
   const ToNaleiLogin({Key? key}) : super(key: key);
@@ -75,7 +77,13 @@ class _PaizanaLoginState extends State<ToNaleiLogin> {
                       height: 35.0,
                       child: MaterialButton(
                         color: const Color(0xFFE49516),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const RegisterFormPage()));
+                        },
                         child: const Text(
                           "Registrar",
                           style: TextStyle(color: Colors.black, fontSize: 11.0),

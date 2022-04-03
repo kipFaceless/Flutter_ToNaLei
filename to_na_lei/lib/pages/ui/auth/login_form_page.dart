@@ -96,10 +96,21 @@ class _LoginFormPageState extends State<LoginFormPage> {
                       ))),
               MaterialButton(
                   onPressed: (() => Get.to(() => const RegisterFormPage())),
-                  child: Text(
+                  child: const Text(
                     "Register",
                     style: TextStyle(color: Colors.greenAccent),
-                  ))
+                  )),
+              SizedBox(width: 130),
+              Positioned(
+                top: 100,
+                child: MaterialButton(
+                    onPressed: (() =>
+                        AuthController.instance.signInWithGoogle()),
+                    child: const Text(
+                      "Google",
+                      style: TextStyle(color: Colors.greenAccent),
+                    )),
+              )
             ],
           ),
         ),

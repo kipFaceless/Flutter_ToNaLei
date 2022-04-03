@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:to_na_lei/pages/ui/auth/login_form_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:to_na_lei/pages/ui/auth/login_page.dart';
 import 'package:to_na_lei/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 
@@ -19,10 +20,11 @@ class AuthController extends GetxController {
 
   _initialScreen(User? user) {
     if (user == null) {
-      print("login page");
-      Get.offAll(() => LoginFormPage());
+      //print("login page");
+      //Get.offAll(() => LoginFormPage());
+      Get.offAll(() => const ToNaleiLogin());
     } else {
-      Get.offAll(() => WelcomePage());
+      Get.offAll(() => WelcomePage(email: user.email!));
     }
   }
 
@@ -65,5 +67,28 @@ class AuthController extends GetxController {
 
   void logout() async {
     await auth.signOut();
+  }
+
+  /* @override
+  Future<User?> signUpWithGoogle() async {
+    //final googleUser = await GoogleSi
+    //await auth.signInWithPopup(GoogleAuthProvider));
+  } */
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    print("chegou");
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
