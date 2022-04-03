@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_na_lei/pages/controllers/auth_controller.dart';
+import 'package:get/get.dart';
+import 'package:to_na_lei/pages/ui/auth/register_form_page.dart';
 
 class LoginFormPage extends StatefulWidget {
   const LoginFormPage({Key? key}) : super(key: key);
@@ -80,7 +82,7 @@ class _LoginFormPageState extends State<LoginFormPage> {
                           child: MaterialButton(
                             color: const Color(0xFFE49516),
                             onPressed: () {
-                              AuthController.instance.register(
+                              AuthController.instance.login(
                                   emailController.text.trim(),
                                   passwordController.text.trim());
                             },
@@ -92,6 +94,12 @@ class _LoginFormPageState extends State<LoginFormPage> {
                           ),
                         ),
                       ))),
+              MaterialButton(
+                  onPressed: (() => Get.to(() => const RegisterFormPage())),
+                  child: Text(
+                    "Register",
+                    style: TextStyle(color: Colors.greenAccent),
+                  ))
             ],
           ),
         ),
