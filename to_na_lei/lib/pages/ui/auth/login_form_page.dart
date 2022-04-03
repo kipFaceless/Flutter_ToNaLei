@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_na_lei/pages/controllers/auth_controller.dart';
 
 class LoginFormPage extends StatefulWidget {
   const LoginFormPage({Key? key}) : super(key: key);
@@ -8,6 +9,8 @@ class LoginFormPage extends StatefulWidget {
 }
 
 class _LoginFormPageState extends State<LoginFormPage> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +40,12 @@ class _LoginFormPageState extends State<LoginFormPage> {
                   height: 45,
                   child: Center(
                     child: TextFormField(
+                        controller: emailController,
                         decoration: InputDecoration(
-                      labelText: "seu@gmail",
-                      fillColor: const Color(0xFFFFFFFF).withOpacity(0.17),
-                      filled: true, // dont forget this line
-                    )),
+                          labelText: "seu@gmail",
+                          fillColor: const Color(0xFFFFFFFF).withOpacity(0.17),
+                          filled: true, // dont forget this line
+                        )),
                   ),
                 ),
               ),
@@ -53,6 +57,7 @@ class _LoginFormPageState extends State<LoginFormPage> {
                     height: 45,
                     child: Center(
                       child: TextFormField(
+                          controller: passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
                             labelText: "Palavra-passe",
@@ -74,7 +79,11 @@ class _LoginFormPageState extends State<LoginFormPage> {
                           height: 40.0,
                           child: MaterialButton(
                             color: const Color(0xFFE49516),
-                            onPressed: () {},
+                            onPressed: () {
+                              AuthController.instance.register(
+                                  emailController.text.trim(),
+                                  passwordController.text.trim());
+                            },
                             child: const Text(
                               "LOGIN",
                               style: TextStyle(

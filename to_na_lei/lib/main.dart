@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:to_na_lei/pages/controllers/auth_controller.dart';
 
 import 'package:to_na_lei/pages/ui/splash/splash.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp().then((value) => Get.put(AuthController()));
   runApp(const MyApp());
 }
 
